@@ -1,0 +1,35 @@
+@import '../../../assets/scss/import';
+
+header {
+    position: fixed;
+    background-color: $light;
+    z-index: 10;
+    bottom: 0;
+    height: 4rem;
+    width: 100vw;
+    box-shadow: 0 0 10px $dark;
+    // @include minQ() {}
+    a {
+        @include darkLink;
+    }
+    .logo {
+        padding: 0 1rem;
+        font-size: 200%;
+        position: absolute;
+        display: inline;
+        top: 50%;
+        left: 0;
+        transform: translateY(-50%);
+    }
+    nav {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        display: inline;
+        padding: 0 3vw;
+        &>a {
+            padding-left: 3vw;
+        }
+    }
+}

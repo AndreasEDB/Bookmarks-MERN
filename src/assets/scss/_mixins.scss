@@ -1,0 +1,60 @@
+@mixin minQ($arg) {
+    @media only screen and (min-width: $arg) {
+        @content
+    }
+}
+
+@mixin maxQ($arg) {
+    @media only screen and (max-width: calc($arg)) {
+        @content
+    }
+}
+
+@mixin lightLink {
+    text-decoration: none;
+    color: $light;
+    cursor: pointer;
+    &:hover {
+        color: darken($light, 60%);
+    }
+}
+
+@mixin darkLink {
+    text-decoration: none;    
+    color: $dark;
+    cursor: pointer;
+    &:hover {
+        color: lighten($dark, 40%);
+    }
+}
+
+@mixin darkBtn {
+    cursor: pointer;
+    &:hover {
+        background-color: lighten($dark, 30%);
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
+
+@mixin lightBtn {
+    cursor: pointer;
+    &:hover {
+        color: $bg-clr;
+        background-color: $font-clr;
+        cursor: pointer;
+        font-weight: bold;
+    }
+}
+
+@mixin textBorder($width, $color) {
+    text-shadow:
+    (-$width) ($width) $color,
+    (-$width) (-$width) $color,
+    ($width) ($width) $color,
+    ($width) (-$width) $color,
+    ($width) 0 $color,
+    (-$width) 0 $color,
+    0 (-$width) $color,
+    0 ($width) $color;
+}

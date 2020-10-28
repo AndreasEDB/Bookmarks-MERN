@@ -1,0 +1,26 @@
+post http://localhost:5500/quotes/
+Content-type: application/json
+
+{
+    "title": "Ydmygende!",
+    "quoteText": "Giv mig mine bukser tilbage",
+    "quoteAuthor": "Henrik Dahl",
+    "category": "5f97df17cf6d27eace70e090"
+}
+
+###
+
+POST http://localhost:5500/quotes/categories
+Content-type: application/json
+
+{
+    "category": "Inspirerende"
+}
+
+###
+
+DELETE http://localhost:5500/quotes/5f97e4b8b6d58bfc35c60655
+
+###
+
+GET http://localhost:5500/quotes/

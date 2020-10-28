@@ -1,0 +1,10 @@
+@import './assets/scss/import';
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    color: $dark;
+    background-color: $light;
+}
