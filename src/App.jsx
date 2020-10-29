@@ -16,7 +16,7 @@ function App() {
       <Header />
       <Switch>
         <Route exact path="/" component={Quotes} />
-        <Route exact path="/:quoteID" component={Quote} />
+        <Route path="/quotes/:quoteID" component={Quote} />
         <Route exact path="/admin" component={Admin} />
       </Switch>
     </BrowserRouter>

@@ -1,0 +1,53 @@
+@import '../../assets/scss/import';
+
+#admin {
+    padding: 5rem 0;
+    min-height: 100vh;
+    background-image: repeating-radial-gradient(
+        red 10%,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red
+    );
+    .admin-panel {
+        background-color: transparentize($light, .2);
+        padding: 3rem 1rem;
+        width: 900px;
+        max-width: 95%;
+        margin: auto;
+        ul {
+            width: 100%;
+            padding: 0;
+            list-style-type: none;
+            li {
+                display: grid;
+                width: 100%;
+                gap: 1rem;
+                grid-template-columns: 25fr 10fr 15fr 20fr 20fr 5fr 5fr;
+                margin-bottom: 1rem;
+                background-color: $light;
+                padding: 0.5rem;
+                align-items: center;
+            }
+        }
+        .delete {
+            display: none;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        .quote5f97ef0a397e7818b9c97625 {
+            display: block;
+        }
+    }
+}

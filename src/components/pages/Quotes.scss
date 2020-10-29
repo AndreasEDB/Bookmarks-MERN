@@ -1,8 +1,23 @@
-@import '../../assets/scss/import';
+@import "../../assets/scss/import";
 
 #quotes {
+    background-image: repeating-radial-gradient(
+        red 10%,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red,
+        yellow,
+        red
+    );
     .quote-list {
-        padding-bottom: 5rem;
+        padding: 5rem 0;
         width: 900px;
         max-width: 95%;
         margin: auto;
@@ -15,9 +30,9 @@
             position: relative;
             padding: 1rem;
             box-shadow: 2px 2px 5px $dark;
+            background-color: $light;
             h4 {
                 font-weight: 200;
-                
             }
             .quote-text {
                 font-size: 200%;

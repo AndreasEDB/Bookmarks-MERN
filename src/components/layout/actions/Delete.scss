@@ -1,0 +1,17 @@
+@import '../../../assets/scss/import';
+
+
+
+.delete {
+    position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+    background-color: $light;
+    filter: blur(0);
+    box-shadow: 0 0 10px $dark;
+    width: 400px;
+    max-width: 95vw;
+    min-height: 300px;
+    max-height: 95vh;
+}
