@@ -13,7 +13,7 @@ const Quotes = () => {
         } catch (err) {
             console.log(err);
         }
-        setQuotes(quotes);
+        setQuotes(quotes.reverse());
     };
     useEffect(() => {
         fetchQuotes();

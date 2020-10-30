@@ -1,21 +1,11 @@
 @import "../../assets/scss/import";
 
 #quotes {
-    background-image: repeating-radial-gradient(
-        red 10%,
-        yellow,
-        red,
-        yellow,
-        red,
-        yellow,
-        red,
-        yellow,
-        red,
-        yellow,
-        red,
-        yellow,
-        red
-    );
+    min-height: 100vh;
+    background-image: url('../../assets/gfx/background.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
     .quote-list {
         padding: 5rem 0;
         width: 900px;

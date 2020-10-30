@@ -1,17 +1,46 @@
-@import '../../../assets/scss/import';
-
-
+@import "../../../assets/scss/import";
 
 .delete {
     position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
+    top: -50%;
+    transition: top 1s;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: $light;
-    filter: blur(0);
+    backdrop-filter: blur(8px);
     box-shadow: 0 0 10px $dark;
     width: 400px;
     max-width: 95vw;
-    min-height: 300px;
+    // min-height: 300px;
     max-height: 95vh;
+    padding: 1rem;
+    blockquote {
+        font-size: 120%;
+    }
+    .del-author {
+        text-align: right;
+        font-size: 80%;
+    }
+    button {
+        width: 45%;
+        margin: 2.5%;
+        border: none;
+        padding: 1rem;
+        color: $light;
+        font-weight: bold;
+        font-size: 110%;
+        box-shadow: 0 0 10px $dark;
+        border-radius: 10px;
+        &:hover {
+            cursor: pointer;
+            box-shadow: none;
+        }
+        // -webkit-text-stroke: 1px $dark;
+    }
+    .btn-yes {
+        background-color: #4fe44f;
+    }
+    .btn-no {
+        background-color: #dc3b3b;
+    }
 }
