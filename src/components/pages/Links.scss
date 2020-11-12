@@ -1,12 +1,12 @@
 @import "../../assets/scss/import";
 
-#quotes {
+#links {
     min-height: 100vh;
     background-image: url('../../assets/gfx/background.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;
-    .quote-list {
+    .link-list {
         padding: 5rem 0;
         width: 900px;
         max-width: 95%;
@@ -16,21 +16,31 @@
         @include minQ($md) {
             grid-template-columns: repeat(2, 1fr);
         }
-        .quote {
+        .link {
             position: relative;
             padding: 1rem;
             box-shadow: 2px 2px 5px $dark;
             background-color: $light;
+            .link-img {
+                width: 100%;
+                background-size: cover;
+                background-position: center;
+                &:after {
+                    content: '';
+                    display: block;
+                    padding-bottom: 60%
+                }
+            }
             h4 {
                 font-weight: 200;
             }
-            .quote-text {
+            .link-text {
                 font-size: 200%;
             }
-            .quote-author {
+            .link-author {
                 text-align: right;
             }
-            .quote-overlay {
+            .link-overlay {
                 opacity: 0;
                 transition: opacity 0.5s;
                 position: absolute;
@@ -49,7 +59,7 @@
                     transform: translate(-50%, -50%);
                 }
             }
-            &:hover .quote-overlay {
+            &:hover .link-overlay {
                 opacity: 100%;
             }
         }

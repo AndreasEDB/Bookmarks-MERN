@@ -1,28 +1,30 @@
 const mongoose = require('mongoose')
 
-const quoteSchema = new mongoose.Schema({
+const linkSchema = new mongoose.Schema({
     title: {
         type: String,
         required: true
     },
-    quoteText: {
+    linkDescription: {
+        type: String,
+    },
+    linkUrl: {
         type: String,
         required: true
     },
-    quoteAuthor: {
-        type: String,
-        required: true
+    linkImg: {
+        type: String
     },
     dateAdded: {
         type: Date,
         required: true,
         default: Date.now
     },
-    category: {
+    category: [{
         type: mongoose.Schema.Types.ObjectId,
         required: true,
         ref: 'Category'
-    }
+    }]
 })
 
-module.exports = mongoose.model('Quote', quoteSchema)
+module.exports = mongoose.model('Link', linkSchema)

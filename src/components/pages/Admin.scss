@@ -53,6 +53,9 @@
                 
                 p {
                     text-align: right;
+                    @include minQ($lg) {
+                        text-align: left;
+                    }
                 }
                 .description {
                     text-align: left;
@@ -61,7 +64,7 @@
                 a {
                     @include darkLink;
                 }
-                .quote-id {
+                .link-id {
                     word-break: break-all;
                     font-size: 90%;
                 }
@@ -71,7 +74,7 @@
                     }
                 }
             }
-            .new-quote {
+            .new-link {
                 font-size: 200%;
                 display: block;
                 a {

@@ -5,43 +5,53 @@ const Create = ({ blur }) => {
     const [categories, setCategories] = useState([]);
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
-    const [author, setAuthor] = useState("");
-    const [category, setCategory] = useState("");
-    const [newCategory, setNewCategory] = useState("")
+    const [url, setUrl] = useState("");
+    const [category, setCategory] = useState([]);
+    const [newCategory, setNewCategory] = useState("");
 
     const getCategories = async () => {
         const response = await fetch(
-            "http://localhost:5500/quotes/categories/"
+            "http://localhost:5500/links/categories/"
         );
         setCategories(await response.json());
     };
 
+    // const categoryList = categories.map((category, index) => {
+    //     // let selected = false;
+    //     // index === 0 && (selected = true);
+    //     return (
+    //         <>
+    //             <input type="checkbox" id={category._id} name={category._id} value={category._id} />
+    //         <label for={category._id}>{category.category}</label><br></br>
+    //         </>
+    //     );
+    // });
     const categoryList = categories.map((category, index) => {
-        let selected = false;
-        index === 0 && (selected = true);
         return (
-            <option key={Math.random()} value={category._id} selected={selected}>
+            <option
+                key={Math.random()}
+                value={category._id}
+            >
                 {category.category}
             </option>
         );
     });
 
-    const createQuote = async (title, text, author, category) => {
+    const createLink = async (title, text, url, category) => {
         try {
-            const response = await fetch("http://localhost:5500/quotes/", {
+            const response = await fetch("http://localhost:5500/links/", {
                 method: "POST",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({
                     title: title,
-                    quoteText: text,
-                    quoteAuthor:
-                        author,
+                    linkDescription: text,
+                    linkUrl: url,
                     category: category,
                 }),
             });
             const data = await response.json();
             console.log(data);
-            window.location.reload()
+            window.location.reload();
         } catch (err) {
             console.log(err);
         }
@@ -50,7 +60,7 @@ const Create = ({ blur }) => {
     const createCategory = async (category) => {
         try {
             const response = await fetch(
-                "http://localhost:5500/quotes/categories/",
+                "http://localhost:5500/links/categories/",
                 {
                     method: "POST",
                     headers: { "Content-type": "application/json" },
@@ -60,90 +70,98 @@ const Create = ({ blur }) => {
                 }
             );
             const data = await response.json();
-            createQuote(title, text, author, data._id);
+            createLink(title, text, url, data._id);
         } catch (err) {
             console.log(err);
         }
     };
 
-    
-
     const handleSubmit = async (e) => {
         e.preventDefault();
         // const form = document.querySelector("form").children;
         // console.log(form[10].value)
-        if (category === 'new') {
-            createCategory(newCategory)
+        if (url === '') alert('Udfyld venligst URL-adresse :-)')
+        if (category === "new") {
+            createCategory(newCategory);
         } else {
-            createQuote(title, text, author, category)
+            createLink(title, text, url, category);
         }
-        
     };
     const closeDialog = () => {
         document.querySelector(blur).style.filter = "blur(0px)";
         document.querySelector(".create").style.top = "-50%";
-        setTitle('')
-        setText('')
-        setAuthor('')
-        setCategory('')
-        setNewCategory('')
+        setTitle("");
+        setText("");
+        setUrl("");
+        setCategory([]);
+        setNewCategory("");
     };
-
-    
 
     useEffect(() => {
         getCategories();
         // createCategory('Kærlighed')
     }, []);
     useEffect(() => {
-        // console.log(categories);
+        setCategory([categories[0]])
+    }, [categories])
+    useEffect(() => {
+        console.log(category)
     });
 
     return (
         <article className="create">
-            <h2>Opret nyt citat</h2>
+            <h2>Opret nyt link</h2>
             <form onSubmit={(e) => handleSubmit(e)}>
-                <label htmlFor="title">Titel:</label>
+                {/* <label htmlFor="title">Titel(valgfri):</label>
                 <input
                     type="text"
                     name="title"
                     onChange={(e) => setTitle(e.target.value)}
-                    required="true"
+                    required
                 />
                 <br />
-                <label htmlFor="text">Citat:</label>
+                <label htmlFor="text">Beskrivelse(valgfri):</label>
                 <textarea
                     name="text"
                     cols="30"
                     rows="10"
                     onChange={(e) => setText(e.target.value)}
-                    required="true"
+                    required
                 ></textarea>
-                <br />
-                <label htmlFor="author">Ophavsperson:</label>
+                <br /> */}
+                <label htmlFor="url">URL-adresse:</label>
                 <input
                     type="text"
-                    name="author"
-                    onChange={(e) => setAuthor(e.target.value)}
+                    name="url"
+                    onChange={(e) => setUrl(e.target.value)}
                     required="true"
                 />
                 <br />
-                <label htmlFor="category">Kategori:</label>
+                <p>Kategori:</p>
                 <select
                     name="category"
-                    onChange={(e) => setCategory(e.target.value)}
+                    onChange={(e) => {
+                        setCategory(e.target.value);
+                        console.log(e.target.value);
+                    }}
                     required="true"
+                    value={category}
                 >
                     {categoryList}
                     <option value="new">Tilføj kategori:</option>
                 </select>
                 <br />
-                {category === 'new' && <input
-                    type="text"
-                    name="newCategory"
-                    onChange={(e) => setNewCategory(e.target.value)}
-                    required="true"
-                />}
+                {category === 'new' && (
+                    <>
+                        <label htmlFor="newCategory">Ny kategori:</label>
+                        <input
+                            type="text"
+                            name="newCategory"
+                            onChange={(e) => setNewCategory(e.target.value)}
+                            required
+                        />
+                    </>)
+                }
             </form>
             <button className="btn-yes" onClick={(e) => handleSubmit(e)}>
                 Opret

@@ -6,55 +6,57 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEdit, faTrashAlt, faFile } from "@fortawesome/free-solid-svg-icons";
 import Delete from "../layout/actions/Delete";
 import Create from "../layout/actions/Create";
+import Update from "../layout/actions/Update";
 
 const Admin = () => {
-    const [quotes, setQuotes] = useState([]);
-    const [activeQuote, setActiveQuote] = useState("");
-    const fetchQuotes = async () => {
-        let quotes;
+    const [links, setLinks] = useState([]);
+    const [activeLink, setActiveLink] = useState("");
+    const fetchLinks = async () => {
+        let links;
         try {
-            const response = await fetch("http://localhost:5500/quotes");
-            quotes = await response.json();
+            const response = await fetch("http://localhost:5500/links");
+            links = await response.json();
         } catch (err) {
             console.log(err);
         }
-        setQuotes(quotes.reverse());
+        setLinks(links.reverse());
     };
 
-    const openDialog = (e, quote, dialog) => {
+    const openDialog = (e, link, dialog) => {
         e.preventDefault();
-        setActiveQuote(quote);
+        setActiveLink(link);
         document.querySelector("#admin").style.filter = "blur(6px)";
         document.querySelector(dialog).style.top = "50%";
     };
     
     useEffect(() => {
-        fetchQuotes();
+        fetchLinks();
     }, []);
 
 
-    const quoteList = quotes.map((quote) => {
+    const linkList = links.map((link) => {
+        const categories = link.category.map(category => category.category)
         return (
-            <li key={Math.random()}>
+            <li key={Math.random()} className="link">
                 <p className="description">ID:</p>
-                <p className="quote-id">{quote._id}</p>
+                <p className="link-id">{link._id}</p>
                 <p className="description">Kategori:</p>
-                <p>{quote.category.category}</p>
+                <p>{categories}</p>
                 <p className="description">Titel:</p>
-                <p>{quote.title}</p>
-                <p className="description">Citat:</p>
-                <p>{shorten(quote.quoteText, 30)}</p>
-                <p className="description">Ophavsperson:</p>
-                <p>{quote.quoteAuthor}</p>
+                <p title={link.title} >{link.title}</p>
+                <p className="description">Beskrivelse:</p>
+                <p title={link.linkDescription} >{shorten(link.linkDescription, 35)}</p>
+                <p className="description">URL:</p>
+                <p title={link.linkUrl} >{shorten(link.linkUrl, 15)}</p>
                 <p className="description">Redigér:</p>
                 <p>
-                    <Link>
+                    <Link onClick={(e) => openDialog(e, link, '.update')}>
                         <FontAwesomeIcon icon={faEdit} />
                     </Link>
                 </p>
                 <p className="description">Slet:</p>
                 <p>
-                    <Link onClick={(e) => openDialog(e, quote, '.delete')}>
+                    <Link onClick={(e) => openDialog(e, link, '.delete')}>
                         <FontAwesomeIcon icon={faTrashAlt} />
                     </Link>
                 </p>
@@ -65,25 +67,26 @@ const Admin = () => {
         <>
             <section id="admin">
                 <article className="admin-panel">
-                    <ul className="quote-list">
-                        <li className="new-quote">
-                            <Link onClick={e => openDialog(e, '', '.create')}><FontAwesomeIcon icon={faFile}  /> Nyt citat</Link>
+                    <ul className="link-list">
+                        <li className="new-link">
+                            <Link onClick={e => openDialog(e, '', '.create')}><FontAwesomeIcon icon={faFile}  /> Nyt link</Link>
                         </li>
                         <li className="description-li">
                             <p>ID</p>
                             <p>Kategori</p>
                             <p>Titel</p>
-                            <p>Citat</p>
-                            <p>Ophavsperson</p>
+                            <p>Beskrivelse</p>
+                            <p>URL</p>
                             <p>Ret</p>
                             <p>Slet</p>
                         </li>
-                        {quoteList}
+                        {linkList}
                     </ul>
                 </article>
             </section>
-            <Delete activeQuote={activeQuote} blur="#admin" />
+            <Delete activeLink={activeLink} blur="#admin" />
             <Create blur="#admin"/>
+            <Update link={activeLink} blur="#admin"/>
         </>
     );
 };

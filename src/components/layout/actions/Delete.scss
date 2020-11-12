@@ -1,7 +1,7 @@
 @import "../../../assets/scss/import";
 
 .delete {
-    position: absolute;
+    position: fixed;
     top: -50%;
     transition: top 1s;
     left: 50%;

@@ -1,12 +1,12 @@
 import React from "react";
 import "./Delete.scss";
 
-const Delete = ({ activeQuote, blur }) => {
+const Delete = ({ activeLink, blur }) => {
 
-    const deleteQuote = async (quote) => {
+    const deleteLink = async (link) => {
         try {
             const response = await fetch(
-                "http://localhost:5500/quotes/" + quote._id,
+                "http://localhost:5500/links/" + link._id,
                 {
                     method: "DELETE",
                 }
@@ -23,13 +23,13 @@ const Delete = ({ activeQuote, blur }) => {
     };
 
     return (
-        <article className={"delete quote" + activeQuote._id}>
+        <article className={"delete link" + activeLink._id}>
                 <p>Ønsker De at slette følgende citat?</p>
-                <blockquote>{activeQuote.quoteText}</blockquote>
-                <p className="del-author"><em>-{activeQuote.quoteAuthor}</em></p>
+                <blocklink>{activeLink.linkText}</blocklink>
+                <p className="del-author"><em>-{activeLink.linkAuthor}</em></p>
                 <button
                     className="btn-yes"
-                    onClick={() => deleteQuote(activeQuote)}
+                    onClick={() => deleteLink(activeLink)}
                 >
                     Ja
                 </button>

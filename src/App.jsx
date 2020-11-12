@@ -5,8 +5,8 @@ import './App.scss';
 import apiFetch from './assets/scripts/fetch'
 import Header from './components/layout/header/Header';
 import Admin from './components/pages/Admin';
-import Quote from './components/pages/Quote';
-import Quotes from './components/pages/Quotes';
+import Link from './components/pages/Link';
+import Links from './components/pages/Links';
 
 function App() {
   // useEffect(() => {console.clear()}, [])
@@ -15,8 +15,8 @@ function App() {
     <BrowserRouter>
       <Header />
       <Switch>
-        <Route exact path="/" component={Quotes} />
-        <Route path="/quotes/:quoteID" component={Quote} />
+        <Route exact path="/" component={Links} />
+        <Route path="/links/:linkID" component={Link} />
         <Route exact path="/admin" component={Admin} />
       </Switch>
     </BrowserRouter>

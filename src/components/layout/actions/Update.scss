@@ -1,7 +1,7 @@
 @import "../../../assets/scss/import";
 
-.create {
-    position: absolute;
+.update {
+    position: fixed;
     top: -50%;
     transition: top 1s;
     left: 50%;
@@ -14,7 +14,6 @@
     // min-height: 300px;
     max-height: 95vh;
     padding: 1rem;
-    
     h2 {
         margin: 0;
         text-align: center;
@@ -23,18 +22,12 @@
     form {
         label {
             padding: 1rem 0 0 0;
-            display: inline-block;
+            display: block;
         }
         input, textarea {
             width: 100%;
         }
-        input[type=checkbox] {
-            width: unset;
-        }
         padding-bottom: 1rem;
-        p {
-            margin-bottom: 0;
-        }
     }
     
     .del-author {

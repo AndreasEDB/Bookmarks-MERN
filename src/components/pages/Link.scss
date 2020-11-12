@@ -1,0 +1,73 @@
+@import '../../assets/scss/import';
+
+#link {
+    background-image: url("../../assets/gfx/background.jpg");
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    width: 100vw;
+    height: 100vh;
+    .link {
+        background-color: $light;
+        padding-bottom: 5rem;
+        width: 900px;
+        max-width: 95%;
+        margin: auto;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        // position: relative;
+        padding: 4rem;
+        box-shadow: 2px 2px 5px $dark;
+        h4 {
+            font-weight: 200;
+            
+        }
+        .link-text {
+            font-size: clamp(120%, 5vw, 200%);
+            width: 700px;
+            max-width: 100%;
+            margin: auto;
+            padding: 1em 0;
+        }
+        .link-author {
+            text-align: right;
+        }
+        .link-overlay {
+            opacity: 0;
+            transition: opacity 0.5s;
+            position: absolute;
+            top: 0;
+            left: 0;
+            background-color: transparentize($dark, 0.2);
+            width: 100%;
+            height: 100%;
+            z-index: 100;
+            & > h2 {
+                margin: 0;
+                text-decoration: none;
+                color: $light;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%);
+            }
+        }
+        &:hover .link-overlay {
+            opacity: 100%;
+        }
+    }
+            &:after {
+                content: '';
+                display: block;
+                // background-color: white;
+                filter: blur(8px);
+                height: 100vh;
+                width: 100vw;
+                // position: absolute;
+                top: 0;
+                left: 0;
+                // z-index: 0;
+            }
+}
