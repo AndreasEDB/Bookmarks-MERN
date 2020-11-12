@@ -2,13 +2,15 @@ import React, { useEffect, useState } from "react";
 import {Link} from 'react-router-dom'
 import "./Links.scss";
 import {shorten} from '../../assets/scripts/tools'
+const server = process.env.REACT_APP_SERVER
+// console.log(server)
 
 const Links = () => {
     const [links, setLinks] = useState([]);
     const fetchLinks = async () => {
         let links;
         try {
-            const response = await fetch("http://localhost:5500/links");
+            const response = await fetch(server + "/links");
             links = await response.json();
         } catch (err) {
             console.log(err);
@@ -19,12 +21,12 @@ const Links = () => {
         fetchLinks();
     }, []);
     useEffect(() => {
-        console.log(links);
+        // console.log(links);
     });
     const linkList = links.map((link) => {
         let linkImg
         if (link.linkImg) {
-            if (link.linkImg.indexOf('http') != -1) {
+            if (link.linkImg.indexOf('http') !== -1) {
                 linkImg = link.linkImg
             }
             else {

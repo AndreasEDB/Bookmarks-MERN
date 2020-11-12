@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react'
 import './Link.scss'
+const server = process.env.REACT_APP_SERVER
 
 const Link = ({match}) => {
     const linkID = match.params.linkID
     const [link, setLink] = useState('')
     const fetchLink = async () => {
-        const response = await fetch(`http://localhost:5500/links/${linkID}`)
+        const response = await fetch(`${server}/links/${linkID}`)
         setLink(await response.json())
     }
     useEffect(() => {

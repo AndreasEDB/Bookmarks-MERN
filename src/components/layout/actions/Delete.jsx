@@ -1,12 +1,13 @@
 import React from "react";
 import "./Delete.scss";
+const server = process.env.REACT_APP_SERVER
 
 const Delete = ({ activeLink, blur }) => {
 
     const deleteLink = async (link) => {
         try {
             const response = await fetch(
-                "http://localhost:5500/links/" + link._id,
+                server + "/links/" + link._id,
                 {
                     method: "DELETE",
                 }

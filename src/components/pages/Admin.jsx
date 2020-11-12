@@ -7,6 +7,7 @@ import { faEdit, faTrashAlt, faFile } from "@fortawesome/free-solid-svg-icons";
 import Delete from "../layout/actions/Delete";
 import Create from "../layout/actions/Create";
 import Update from "../layout/actions/Update";
+const server = process.env.REACT_APP_SERVER
 
 const Admin = () => {
     const [links, setLinks] = useState([]);
@@ -14,7 +15,7 @@ const Admin = () => {
     const fetchLinks = async () => {
         let links;
         try {
-            const response = await fetch("http://localhost:5500/links");
+            const response = await fetch(server + "/links");
             links = await response.json();
         } catch (err) {
             console.log(err);

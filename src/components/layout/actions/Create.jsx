@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Create.scss";
+const server = process.env.REACT_APP_SERVER
 
 const Create = ({ blur }) => {
     const [categories, setCategories] = useState([]);
@@ -11,7 +12,7 @@ const Create = ({ blur }) => {
 
     const getCategories = async () => {
         const response = await fetch(
-            "http://localhost:5500/links/categories/"
+            server + "/links/categories/"
         );
         setCategories(await response.json());
     };
@@ -39,7 +40,7 @@ const Create = ({ blur }) => {
 
     const createLink = async (title, text, url, category) => {
         try {
-            const response = await fetch("http://localhost:5500/links/", {
+            const response = await fetch(server + "/links/", {
                 method: "POST",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({
@@ -60,7 +61,7 @@ const Create = ({ blur }) => {
     const createCategory = async (category) => {
         try {
             const response = await fetch(
-                "http://localhost:5500/links/categories/",
+                server + "/links/categories/",
                 {
                     method: "POST",
                     headers: { "Content-type": "application/json" },

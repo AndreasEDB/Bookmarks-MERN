@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./Update.scss";
+const server = process.env.REACT_APP_SERVER
 
 const Update = ({ link, blur }) => {
     const [categories, setCategories] = useState([]);
@@ -11,7 +12,7 @@ const Update = ({ link, blur }) => {
 
     const getCategories = async () => {
         const response = await fetch(
-            "http://localhost:5500/links/categories/"
+            server + "/links/categories/"
         );
         setCategories(await response.json());
     };
@@ -40,7 +41,7 @@ const Update = ({ link, blur }) => {
     const updateQuote = async (title, text, url, category) => {
         try {
             const response = await fetch(
-                `http://localhost:5500/links/${link._id}`,
+                `${server}/links/${link._id}`,
                 {
                     method: "PATCH",
                     headers: { "Content-type": "application/json" },
@@ -64,7 +65,7 @@ const Update = ({ link, blur }) => {
     const createCategory = async (category) => {
         try {
             const response = await fetch(
-                "http://localhost:5500/links/categories/",
+                server + "/links/categories/",
                 {
                     method: "POST",
                     headers: { "Content-type": "application/json" },
