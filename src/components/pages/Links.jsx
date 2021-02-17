@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom'
 import "./Links.scss";
 import {shorten} from '../../assets/scripts/tools'
 const server = process.env.REACT_APP_SERVER
-// console.log(server)
+// //console.log(server)
 
 const Links = () => {
     const [links, setLinks] = useState([]);
@@ -13,7 +13,7 @@ const Links = () => {
             const response = await fetch(server + "/links");
             links = await response.json();
         } catch (err) {
-            console.log(err);
+            //console.log(err);
         }
         setLinks(links.reverse());
     };
@@ -21,7 +21,7 @@ const Links = () => {
         fetchLinks();
     }, []);
     useEffect(() => {
-        // console.log(links);
+        //console.table(links);
     });
     const linkList = links.map((link) => {
         let linkImg
@@ -30,9 +30,10 @@ const Links = () => {
                 linkImg = link.linkImg
             }
             else {
-                linkImg = process.env.PUBLIC_URL + link.linkImg.replace('./public/', '')
+                linkImg = process.env.REACT_APP_SERVER + link.linkImg.replace('./public/', '/')
             }
         }
+        let linkHref = link.linkUrl.indexOf('http') === -1 ? 'http://' + link.linkUrl : link.linkUrl
         
         return (
             <article className="link" key={Math.random()}>
@@ -43,15 +44,15 @@ const Links = () => {
                 <p className="link-author">
                     <em>{shorten(link.linkUrl, 30)}</em>
                 </p>
-                <Link
-                    to={`/links/${link._id}`}
+                <a
+                    href={linkHref}
                     target="_blank"
                     className="link-overlay"
                 >
                     <h2>
-                       VIS CITAT
+                       ÅBN SIDE
                     </h2>
-                </Link>
+                </a>
             </article>
         );
     });

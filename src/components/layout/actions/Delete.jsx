@@ -12,9 +12,9 @@ const Delete = ({ activeLink, blur }) => {
                     method: "DELETE",
                 }
             );
-            console.log(await response.json());
+            //console.log(await response.json());
         } catch (err) {
-            console.log(err);
+            //console.log(err);
         }
         window.location.reload()
     };
@@ -25,9 +25,11 @@ const Delete = ({ activeLink, blur }) => {
 
     return (
         <article className={"delete link" + activeLink._id}>
-                <p>Ønsker De at slette følgende citat?</p>
+                <p>Ønsker De at slette følgende link?</p>
                 <blocklink>{activeLink.linkText}</blocklink>
-                <p className="del-author"><em>-{activeLink.linkAuthor}</em></p>
+                <p className="del-link" ><em>
+                    {activeLink.linkUrl}    
+                </em></p>
                 <button
                     className="btn-yes"
                     onClick={() => deleteLink(activeLink)}

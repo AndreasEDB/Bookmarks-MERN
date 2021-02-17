@@ -25,6 +25,7 @@
                 width: 100%;
                 background-size: cover;
                 background-position: center;
+                box-shadow: 2px 2px 5px $dark;
                 &:after {
                     content: '';
                     display: block;

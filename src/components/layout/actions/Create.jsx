@@ -12,21 +12,12 @@ const Create = ({ blur }) => {
 
     const getCategories = async () => {
         const response = await fetch(
-            server + "/links/categories/"
+            server + "/categories/"
         );
         setCategories(await response.json());
     };
 
-    // const categoryList = categories.map((category, index) => {
-    //     // let selected = false;
-    //     // index === 0 && (selected = true);
-    //     return (
-    //         <>
-    //             <input type="checkbox" id={category._id} name={category._id} value={category._id} />
-    //         <label for={category._id}>{category.category}</label><br></br>
-    //         </>
-    //     );
-    // });
+
     const categoryList = categories.map((category, index) => {
         return (
             <option
@@ -40,7 +31,7 @@ const Create = ({ blur }) => {
 
     const createLink = async (title, text, url, category) => {
         try {
-            const response = await fetch(server + "/links/", {
+            await fetch(server + "/links/", {
                 method: "POST",
                 headers: { "Content-type": "application/json" },
                 body: JSON.stringify({
@@ -50,18 +41,16 @@ const Create = ({ blur }) => {
                     category: category,
                 }),
             });
-            const data = await response.json();
-            console.log(data);
             window.location.reload();
         } catch (err) {
-            console.log(err);
+            alert('Der er desværre sket en fejl med serveren. Prøv igen :-)')
         }
     };
 
     const createCategory = async (category) => {
         try {
             const response = await fetch(
-                server + "/links/categories/",
+                server + "/categories/",
                 {
                     method: "POST",
                     headers: { "Content-type": "application/json" },
@@ -73,14 +62,12 @@ const Create = ({ blur }) => {
             const data = await response.json();
             createLink(title, text, url, data._id);
         } catch (err) {
-            console.log(err);
+            //console.log(err);
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        // const form = document.querySelector("form").children;
-        // console.log(form[10].value)
         if (url === '') alert('Udfyld venligst URL-adresse :-)')
         if (category === "new") {
             createCategory(newCategory);
@@ -100,36 +87,18 @@ const Create = ({ blur }) => {
 
     useEffect(() => {
         getCategories();
-        // createCategory('Kærlighed')
     }, []);
     useEffect(() => {
         setCategory([categories[0]])
     }, [categories])
     useEffect(() => {
-        console.log(category)
+        //console.log(category)
     });
 
     return (
         <article className="create">
             <h2>Opret nyt link</h2>
             <form onSubmit={(e) => handleSubmit(e)}>
-                {/* <label htmlFor="title">Titel(valgfri):</label>
-                <input
-                    type="text"
-                    name="title"
-                    onChange={(e) => setTitle(e.target.value)}
-                    required
-                />
-                <br />
-                <label htmlFor="text">Beskrivelse(valgfri):</label>
-                <textarea
-                    name="text"
-                    cols="30"
-                    rows="10"
-                    onChange={(e) => setText(e.target.value)}
-                    required
-                ></textarea>
-                <br /> */}
                 <label htmlFor="url">URL-adresse:</label>
                 <input
                     type="text"
@@ -143,7 +112,7 @@ const Create = ({ blur }) => {
                     name="category"
                     onChange={(e) => {
                         setCategory(e.target.value);
-                        console.log(e.target.value);
+                        //console.log(e.target.value);
                     }}
                     required="true"
                     value={category}

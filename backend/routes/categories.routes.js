@@ -22,8 +22,7 @@ router.get("/:id", getCategory, (req, res) => {
 //Create
 router.post("/", async (req, res) => {
     const category = new Category({
-        content: req.body.content,
-        author: req.body.author,
+        category: req.body.category,
     });
 
     try {
@@ -71,6 +70,6 @@ async function getCategory(req, res, next) {
         res.status(500).json({ message: err.message });
     }
     res.category = category;
-    // console.log(category)
+    // //console.log(category)
     next();
 }

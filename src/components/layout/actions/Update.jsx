@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import "./Update.scss";
 const server = process.env.REACT_APP_SERVER
 
-const Update = ({ link, blur }) => {
+const Update = ({ link, blur, dismiss }) => {
     const [categories, setCategories] = useState([]);
     const [title, setTitle] = useState("");
     const [text, setText] = useState("");
@@ -12,7 +12,7 @@ const Update = ({ link, blur }) => {
 
     const getCategories = async () => {
         const response = await fetch(
-            server + "/links/categories/"
+            server + "/categories/"
         );
         setCategories(await response.json());
     };
@@ -36,9 +36,10 @@ const Update = ({ link, blur }) => {
         setUrl("");
         setCategory("");
         setNewCategory("");
+        dismiss()
     };
 
-    const updateQuote = async (title, text, url, category) => {
+    const updateLink = async (title, text, url, category) => {
         try {
             const response = await fetch(
                 `${server}/links/${link._id}`,
@@ -54,18 +55,18 @@ const Update = ({ link, blur }) => {
                 }
             );
             const data = await response.json();
-            console.log(data);
+            //console.log(data);
             // window.location.reload()
             closeDialog();
         } catch (err) {
-            console.log(err);
+            //console.log(err);
         }
     };
 
     const createCategory = async (category) => {
         try {
             const response = await fetch(
-                server + "/links/categories/",
+                server + "/categories/",
                 {
                     method: "POST",
                     headers: { "Content-type": "application/json" },
@@ -75,20 +76,20 @@ const Update = ({ link, blur }) => {
                 }
             );
             const data = await response.json();
-            updateQuote(title, text, url, data._id);
+            updateLink(title, text, url, data._id);
         } catch (err) {
-            console.log(err);
+            //console.log(err);
         }
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         // const form = document.querySelector("form").children;
-        // console.log(form[10].value)
+        // //console.log(form[10].value)
         if (category === "new") {
             createCategory(newCategory);
         } else {
-            updateQuote(title, text, url, category);
+            updateLink(title, text, url, category);
         }
     };
 
@@ -97,20 +98,20 @@ const Update = ({ link, blur }) => {
         setTitle(link.title);
         setText(link.linkDescription);
         setUrl(link.linkUrl);
-        setCategory(link.category !== undefined ? link.category._id : '');
-        console.log(link)
+        setCategory(link.category !== undefined ? link.category[0]._id : '');
+        //console.log(link)
         // createCategory('Kærlighed')
     }, [link]);
 
     useEffect(() => {
-        // console.log(link);
-        // console.log(title)
-        console.log(category)
+        // //console.log(link);
+        // //console.log(title)
+        //console.log(category)
     });
 
     return (
         <article className="update">
-            <h2>Redigér citat</h2>
+            <h2>Redigér link</h2>
             <form onSubmit={(e) => handleSubmit(e)}>
                 <label htmlFor="title">Titel:</label>
             
@@ -122,7 +123,7 @@ const Update = ({ link, blur }) => {
                     required
                 />
                 <br />
-                <label htmlFor="text">Citat:</label>
+                <label htmlFor="text">Beskrivelse:</label>
 
                 <textarea
                     name="text"
@@ -133,7 +134,7 @@ const Update = ({ link, blur }) => {
                     required
                 ></textarea>
                 <br />
-                <label htmlFor="url">Ophavsperson:</label>
+                <label htmlFor="url">URL-adresse:</label>
 
                 <input
                     type="text"

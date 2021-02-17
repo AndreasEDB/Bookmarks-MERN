@@ -5,10 +5,10 @@ const apiFetch = {
         try {
             let response = await fetch(this.quotesUrl);
             quotes = await response.json();
-            console.log(quotes)
+            //console.log(quotes)
             // return quotes;
         } catch (err) {
-            console.log(err);
+            //console.log(err);
         }
         return quotes
     },

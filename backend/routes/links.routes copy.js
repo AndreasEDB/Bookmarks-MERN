@@ -15,7 +15,7 @@ router.get("/", async (req, res) => {
         // for (i in link) {
         //     link[i].category = await Category.findById(link[i].category);
         // }
-        // console.log(link.length)
+        // //console.log(link.length)
         res.json(link);
     } catch {
         res.status(500).json({ message: err.message });
@@ -23,8 +23,8 @@ router.get("/", async (req, res) => {
 });
 router.get("/categories/", async (req, res) => {
     try {
-        const link = await Category.find();
-        res.json(link);
+        const category = await Category.find();
+        res.json(category);
     } catch {
         res.status(500).json({ message: err.message });
     }
@@ -32,7 +32,7 @@ router.get("/categories/", async (req, res) => {
 
 //Find one
 router.get("/:id", getLink, (req, res) => {
-    // console.log(res)
+    // //console.log(res)
     res.send(res.link);
 });
 
@@ -42,7 +42,7 @@ router.get("/categories/:id", getCategory, (req, res) => {
 
 //Create
 router.post("/", getMeta, async (req, res) => {
-    console.log(res.metadata)
+    //console.log(res.metadata)
     let title = req.body.title
     let linkDescription = req.body.linkDescription
     let linkImg = ''
@@ -52,7 +52,8 @@ router.post("/", getMeta, async (req, res) => {
     if (res.metadata.image && res.metadata.image.url.indexOf('http') > -1) {
         linkImg = res.metadata.image.url
     } else {
-        let fileName = `${req.body.category.category + Date.now()}.png`
+        let fileName = [req.body.category.category, Date.now(), '.png'].join('')
+        console.log(fileName)
         let filePath = `./public/assets/screenshots/${fileName}`
         await captureWebsite.file(req.body.linkUrl.indexOf('http') > -1 ? req.body.linkUrl : 'http://' + req.body.linkUrl, filePath, {scaleFactor: 0.7})
         linkImg = filePath
@@ -65,7 +66,7 @@ router.post("/", getMeta, async (req, res) => {
         linkImg: linkImg,
         category: req.body.category
     });
-    console.log(res.metadata.linkUrl)
+    //console.log(res.metadata.linkUrl)
 
     try {
         const newLink = await link.save();
@@ -142,7 +143,7 @@ async function getMeta(req, res, next) {
             next()
         })
     } catch (err) {
-        console.log('Error: ' + err)
+        //console.log('Error: ' + err)
     }
     
 }
@@ -158,6 +159,6 @@ async function getCategory(req, res, next) {
         res.status(500).json({ message: err.message });
     }
     res.category = category;
-    // console.log(category)
+    // //console.log(category)
     next();
 }

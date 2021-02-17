@@ -18,7 +18,7 @@ const Admin = () => {
             const response = await fetch(server + "/links");
             links = await response.json();
         } catch (err) {
-            console.log(err);
+            //console.log(err);
         }
         setLinks(links.reverse());
     };
@@ -87,7 +87,7 @@ const Admin = () => {
             </section>
             <Delete activeLink={activeLink} blur="#admin" />
             <Create blur="#admin"/>
-            <Update link={activeLink} blur="#admin"/>
+            <Update link={activeLink} dismiss={() => setActiveLink('')} blur="#admin"/>
         </>
     );
 };

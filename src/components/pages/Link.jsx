@@ -12,8 +12,6 @@ const Link = ({match}) => {
     useEffect(() => {
         fetchLink()
     }, [])
-    useEffect(() => console.log(link))
-    console.log(linkID)
     return (
         <section id="link">
             <article className="link" key={Math.random()}>

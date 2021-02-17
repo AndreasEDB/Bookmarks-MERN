@@ -14,7 +14,7 @@ POST http://localhost:5500/links/categories
 Content-type: application/json
 
 {
-    "category": "Søgesider"
+    "category": "Kodning"
 }
 
 ###
@@ -32,4 +32,4 @@ GET https://date.nager.at/api/v2/PublicHolidays/2020/dk
 
 ###
 
-GET https://api.abalin.net/today?country=dk
+GET https://api.abalin.net/tomorrow?country=dk
